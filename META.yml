@@ -20,7 +20,7 @@ requires:
 resources:
   homepage: http://search.cpan.org/dist/WWW-Google-Auth-ClientLogin/
   repository: git://github.com/AlexBio/WWW-Google-Auth-ClientLogin.git
-version: 0.01
+version: 0.02
 x_Dist_Zilla:
   plugins:
     -

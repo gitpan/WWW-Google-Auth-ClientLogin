@@ -1,3 +1,19 @@
+==============================
+9999-99-99 99:99:99 +0000 HEAD
+==============================
+
+  commit d83630cfe4dbf2c67753544eb7d1a22146aa33cf
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Thu Jan 6 13:09:07 2011 +0100
+  
+    bump version
+
+  commit 56125b40fd5cb75bf5fd8f828780fdc335e98cbf
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Thu Jan 6 13:08:49 2011 +0100
+  
+    fix VERSION variable usage 
+
 ===================================
 End of changes in the last 365 days
 ===================================

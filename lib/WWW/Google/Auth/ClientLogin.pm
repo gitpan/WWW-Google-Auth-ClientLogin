@@ -1,6 +1,6 @@
 package WWW::Google::Auth::ClientLogin;
 BEGIN {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.01';
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.02';
 }
 
 use Carp;
@@ -16,7 +16,7 @@ WWW::Google::Auth::ClientLogin - Perl module to interact with Google's ClientLog
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -97,7 +97,7 @@ sub new {
 
 	$self -> {'email'} = $params{'email'} || croak("Err: set a valid email");
 	$self -> {'pwd'}   = $params{'password'} || croak("Err: set a password");
-	$self -> {'src'}   = $params{'source'} || __PACKAGE__ . $__PACKAGE__::VERSION;
+	$self -> {'src'}   = $params{'source'} || __PACKAGE__ . $WWW::Google::Auth::ClientLogin::VERSION;
 
 	my @valid_account_types = ('GOOGLE', 'HOSTED', 'HOSTED_OR_GOOGLE');
 
