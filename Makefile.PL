@@ -23,10 +23,9 @@ my %WriteMakefileArgs = (
   'NAME' => 'WWW::Google::Auth::ClientLogin',
   'PREREQ_PM' => {
     'Carp' => '0',
-    'HTTP::Request::Common' => '0',
-    'LWP::UserAgent' => '0'
+    'HTTP::Tiny' => '0'
   },
-  'VERSION' => '0.02',
+  'VERSION' => '0.03',
   'test' => {
     'TESTS' => 't/*.t'
   }

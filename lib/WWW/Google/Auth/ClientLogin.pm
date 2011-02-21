@@ -1,11 +1,10 @@
 package WWW::Google::Auth::ClientLogin;
 BEGIN {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.02';
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.03';
 }
 
 use Carp;
-use LWP::UserAgent;
-use HTTP::Request::Common;
+use HTTP::Tiny;
 
 use warnings;
 use strict;
@@ -16,26 +15,27 @@ WWW::Google::Auth::ClientLogin - Perl module to interact with Google's ClientLog
 
 =head1 VERSION
 
-version 0.02
+version 0.03
 
 =head1 SYNOPSIS
 
     use WWW::Google::Auth::ClientLogin;
 
     my $auth = WWW::Google::Auth::ClientLogin -> new(
-		email 		=> 'user@gmail.com',
-		password 	=> 'UserPassword',
-		source		=> 'MyApp-0.8',
-		type		=> 'GOOGLE',
-		service 	=> 'writely');
-		
-    my $auth_token = $auth -> authenticate -> {'Auth'};
+      email    => 'user@gmail.com',
+      password => 'UserPassword',
+      source   => 'MyApp-0.8',
+      type     => 'GOOGLE',
+      service  => 'writely'
+    );
+
+    my $auth_token = $auth -> authenticate -> {'auth_token'};
 
 =head1 DESCRIPTION
 
 Google's ClientLogin is a programmatic method for getting authorized access
 to information exchanged with Google services and protected by an user
-account, implemented in the second version of the Goodle Data Protocol.
+account, implemented in the second version of the Google Data Protocol.
 
 WWW::Google::Auth::ClientLogin implements the support to such method
 providing an easy-to-use object oriented interface.
@@ -53,11 +53,11 @@ as parameters the following variables:
 
 =item B<email>
 
-Specifies the user's full email address..  
+Specifies the user's full email address..
 
 =item B<password>
 
-Specifies the user's password. 
+Specifies the user's password.
 
 =item B<source>
 
@@ -65,7 +65,7 @@ Specifies a string identifying your application (optional).
 
 =item B<type> (default to HOSTED_OR_GOOGLE)
 
-Specifies the type of the account to request authorization for (optional, 
+Specifies the type of the account to request authorization for (optional,
 default to HOSTED_OR_GOOGLE).
 
 Possible values are GOOGLE, HOSTED or HOSTED_OR_GOOGLE (default).
@@ -95,9 +95,9 @@ sub new {
 	my %params = @_;
 	my $self   = {};
 
-	$self -> {'email'} = $params{'email'} || croak("Err: set a valid email");
-	$self -> {'pwd'}   = $params{'password'} || croak("Err: set a password");
-	$self -> {'src'}   = $params{'source'} || __PACKAGE__ . $WWW::Google::Auth::ClientLogin::VERSION;
+	$self -> {'email'}	= $params{'email'} || croak("Err: set a valid email");
+	$self -> {'pwd'}	= $params{'password'} || croak("Err: set a password");
+	$self -> {'source'}	= $params{'source'} || __PACKAGE__ . $WWW::Google::Auth::ClientLogin::VERSION;
 
 	my @valid_account_types = ('GOOGLE', 'HOSTED', 'HOSTED_OR_GOOGLE');
 
@@ -107,8 +107,8 @@ sub new {
 		$self -> {'type'} = 'HOSTED_OR_GOOGLE';
 	}
 
-	my @valid_services = ('analytics', 'apps', 'gbase', 'jotspot', 
-			      'blogger', 'print', 'cl', 'codesearch', 'cp', 
+	my @valid_services = ('analytics', 'apps', 'gbase', 'jotspot',
+			      'blogger', 'print', 'cl', 'codesearch', 'cp',
 			      'writely', 'finance', 'mail', 'health', 'weaver',
 			      'local', 'lh2', 'annotateweb', 'wise', 'sitemaps',
 			      'youtube');
@@ -118,11 +118,11 @@ sub new {
 	} else {
 		croak("Err: set a valid service");
 	}
-	
+
 	if ($params{'captcha_token'}) {
 		$self -> {'logintoken'} = $params{'captcha_token'};
 	}
-	
+
 	if ($params{'captcha_login'}) {
 		$self -> {'logincaptcha'} = $params{'captcha_login'};
 	}
@@ -161,7 +161,7 @@ The token specific to a CAPTCHA challenge (set if error code is 'CaptchaRequired
 
 =item B<captcha_url>
 
-Url pointing to the CAPTCHA image to be show n to user. Must be prefixed 
+Url pointing to the CAPTCHA image to be show n to user. Must be prefixed
 with 'http://www.google.com/accounts/' (set if error code is 'CaptchaRequired').
 
 =back
@@ -171,22 +171,29 @@ with 'http://www.google.com/accounts/' (set if error code is 'CaptchaRequired').
 sub authenticate {
 	my $self = shift;
 
-	my $ua = LWP::UserAgent -> new;
+	my $http = HTTP::Tiny -> new();
 	my $url = 'https://www.google.com/accounts/ClientLogin';
 
-	my %params = ('accountType', 	$self -> {'type'},
-		      'Email',		$self -> {'email'},
-		      'Passwd',		$self -> {'pwd'},
-		      'service',	$self -> {'service'},
-		      'source',		$self -> {'source'});
-	
-	$params{'logintoken'} 	= $self -> {'logintoken'} if $self -> {'logintoken'};
-	$params{'logincaptcha'} = $self -> {'logincaptcha'} if $self -> {'logincaptcha'};
+	my @params;
 
-	my $response 	= $ua -> request(POST $url, [%params]) -> as_string;
+	my $account_type	= 'accountType='.$self -> {'type'};
+	my $email		= 'Email='.$self -> {'email'};
+	my $passwd		= 'Passwd='.$self -> {'pwd'};
+	my $service		= 'service='.$self -> {'service'};
+	my $src			= 'source='.$self -> {'source'};
 
-	my $status  	= (split / /,(split /\n/, $response)[0])[1];
-	my $body	= (split /\n\n/, $response)[1];
+	push @params, $account_type, $email, $passwd, $service, $src;
+
+	push @params, 'logintoken='.$self -> {'logintoken'} if $self -> {'logintoken'};
+	push @params, 'logincaptcha='.$self -> {'logincaptcha'} if $self -> {'logincaptcha'};
+
+	my $response = $http -> request('POST', $url, {
+		content => join("&", @params),
+		headers => {'content-type' => 'application/x-www-form-urlencoded'}
+	});
+
+	my $status  	= $response -> {'status'};
+	my $body	= $response -> {'content'};
 
 	my $out = {};
 
@@ -222,7 +229,7 @@ Alessandro Ghedini <alexbio@cpan.org>
 =head1 BUGS
 
 Please report any bugs or feature requests at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-Google-Auth-ClientLogin>.
-I will be notified, and then you'll automatically be notified of progress 
+I will be notified, and then you'll automatically be notified of progress
 on your bug as I make changes.
 
 =head1 SUPPORT
