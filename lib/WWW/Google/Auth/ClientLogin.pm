@@ -1,6 +1,6 @@
 package WWW::Google::Auth::ClientLogin;
 BEGIN {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.03';
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.04';
 }
 
 use Carp;
@@ -15,7 +15,7 @@ WWW::Google::Auth::ClientLogin - Perl module to interact with Google's ClientLog
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 SYNOPSIS
 
@@ -29,7 +29,9 @@ version 0.03
       service  => 'writely'
     );
 
-    my $auth_token = $auth -> authenticate -> {'auth_token'};
+    my $auth = $auth -> authenticate;
+
+    die $auth -> {'error'} if $auth -> {'status'} < 0;
 
 =head1 DESCRIPTION
 
@@ -72,9 +74,31 @@ Possible values are GOOGLE, HOSTED or HOSTED_OR_GOOGLE (default).
 
 =item B<service>
 
-Specifies the service to request authorization for.
+Specifies the service to request authorization for. The following services are
+supported:
 
-A list of available services can be found at L<http://code.google.com/intl/en/apis/base/faq_gdata.html#clientlogin>.
+    Google Analytics Data APIs    analytics
+    Google Apps APIs              apps
+    Google Base Data API          gbase
+    Google Custom Search API      cprose
+    Google Sites Data API         jotspot
+    Blogger Data API              blogger
+    Book Search Data API          print
+    Calendar Data API             cl
+    Google Code Search Data API   codesearch
+    Contacts Data API             cp
+    Documents List Data API       writely
+    Finance Data API              finance
+    Gmail Atom feed               mail
+    Health Data API               health
+    Maps Data APIs                local
+    Picasa Web Albums Data API    lh2
+    Sidewiki Data API             annotateweb
+    Spreadsheets Data API         wise
+    Webmaster Tools API           sitemaps
+    YouTube Data API              youtube
+
+Additional info can be found at L<http://code.google.com/intl/en/apis/base/faq_gdata.html#clientlogin>.
 
 =item B<captcha_token>
 
@@ -107,11 +131,15 @@ sub new {
 		$self -> {'type'} = 'HOSTED_OR_GOOGLE';
 	}
 
-	my @valid_services = ('analytics', 'apps', 'gbase', 'jotspot',
-			      'blogger', 'print', 'cl', 'codesearch', 'cp',
-			      'writely', 'finance', 'mail', 'health', 'weaver',
-			      'local', 'lh2', 'annotateweb', 'wise', 'sitemaps',
-			      'youtube');
+	my @valid_services = (
+		'analytics', 'apps', 'gbase',
+		'jotspot', 'blogger', 'print',
+		'cl', 'codesearch', 'cp', 'cprose',
+		'writely', 'finance', 'mail',
+		'health', 'weaver', 'local',
+		'lh2', 'annotateweb', 'wise',
+		'sitemaps', 'youtube'
+	);
 
 	if (grep {$_ eq $params{'service'}} @valid_services) {
 		$self -> {'service'} = $params{'service'};
@@ -225,44 +253,6 @@ sub authenticate {
 =head1 AUTHOR
 
 Alessandro Ghedini <alexbio@cpan.org>
-
-=head1 BUGS
-
-Please report any bugs or feature requests at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=WWW-Google-Auth-ClientLogin>.
-I will be notified, and then you'll automatically be notified of progress
-on your bug as I make changes.
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc WWW::Google::Auth::ClientLogin
-
-You can also look for information at:
-
-=over 4
-
-=item * GitHub page
-
-L<http://github.com/AlexBio/WWW-Google-Auth-ClientLogin>
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=WWW-Google-Auth-ClientLogin>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/WWW-Google-Auth-ClientLogin>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/WWW-Google-Auth-ClientLogin>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/WWW-Google-Auth-ClientLogin/>
-
-=back
 
 =head1 LICENSE AND COPYRIGHT
 

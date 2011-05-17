@@ -2,6 +2,58 @@
 9999-99-99 99:99:99 +0000 HEAD
 ==============================
 
+  commit 22c56686bf5fd9aa1f5ec18885b2fd0fa5335c92
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Tue May 17 17:44:48 2011 +0200
+  
+    bump version
+
+  commit 2c7aa3bcf08ce59dfb2d99f850010ef7cd6204e7
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Tue May 17 17:20:55 2011 +0200
+  
+    add error checking in SYNOPSIS
+
+  commit 90d1e14f4a04cfcb2ea32eec9d0208da728a64c9
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Tue May 17 17:09:33 2011 +0200
+  
+    add Custom Search API service name, closes #1
+
+  commit 1c36cad9a89833860bf8bed8ed5ddfa71aced2dc
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Tue May 17 17:08:44 2011 +0200
+  
+    cosmetic change in services array
+
+  commit e2fb8f937cc6b16e454ad4635e1957b47d14e2ec
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Tue May 17 17:05:35 2011 +0200
+  
+    list supported services in docs
+
+  commit 8e33f9fc31ed2e63da7cbc9a8207af294a1c8a1f
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Mon Apr 25 18:49:51 2011 +0200
+  
+    use Author::ALEXBIO dzil bundle
+
+  commit 5bb39f471101b0d03e53dc310f0d8c60e2a2f55f
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Thu Mar 17 19:51:29 2011 +0100
+  
+    purge cruft from docs
+
+  commit aaa4151bd412e3871427a4edc9f03dba772a6c4a
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date:   Thu Mar 17 19:50:59 2011 +0100
+  
+    use @GitHub plugin bundle 
+
+===============================
+2011-02-21 22:20:16 +0100 v0.03
+===============================
+
   commit cdcede7bcb0400d8e87014cc62301c36f63306ca
   Author: Alessandro Ghedini <al3xbio@gmail.com>
   Date:   Mon Feb 21 22:20:16 2011 +0100
