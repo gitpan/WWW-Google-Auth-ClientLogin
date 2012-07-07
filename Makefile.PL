@@ -9,25 +9,29 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Perl module to interact with Google\'s ClientLogin protocol',
-  'AUTHOR' => 'Alessandro Ghedini <alexbio@cpan.org>',
-  'BUILD_REQUIRES' => {
-    'Test::More' => '0'
+  "ABSTRACT" => "Perl module to interact with Google's ClientLogin protocol",
+  "AUTHOR" => "Alessandro Ghedini <alexbio\@cpan.org>",
+  "BUILD_REQUIRES" => {
+    "File::Find" => 0,
+    "File::Temp" => 0,
+    "Test::More" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30"
   },
-  'DISTNAME' => 'WWW-Google-Auth-ClientLogin',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'WWW::Google::Auth::ClientLogin',
-  'PREREQ_PM' => {
-    'Carp' => '0',
-    'HTTP::Tiny' => '0'
+  "DISTNAME" => "WWW-Google-Auth-ClientLogin",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "WWW::Google::Auth::ClientLogin",
+  "PREREQ_PM" => {
+    "Carp" => 0,
+    "HTTP::Tiny" => 0,
+    "strict" => 0,
+    "warnings" => 0
   },
-  'VERSION' => '0.04',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "VERSION" => "0.05",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 

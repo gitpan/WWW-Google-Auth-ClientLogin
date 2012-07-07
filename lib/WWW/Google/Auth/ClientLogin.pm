@@ -1,6 +1,6 @@
 package WWW::Google::Auth::ClientLogin;
-BEGIN {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.04';
+{
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.05';
 }
 
 use Carp;
@@ -15,7 +15,7 @@ WWW::Google::Auth::ClientLogin - Perl module to interact with Google's ClientLog
 
 =head1 VERSION
 
-version 0.04
+version 0.05
 
 =head1 SYNOPSIS
 
@@ -29,9 +29,9 @@ version 0.04
       service  => 'writely'
     );
 
-    my $auth = $auth -> authenticate;
+    my $token = $auth -> authenticate;
 
-    die $auth -> {'error'} if $auth -> {'status'} < 0;
+    die $token -> {'error'} if $token -> {'status'} < 0;
 
 =head1 DESCRIPTION
 
