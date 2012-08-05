@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "Perl module to interact with Google's ClientLogin protocol",
+  "ABSTRACT" => "(DEPRECATED) Perl module to interact with Google's ClientLogin protocol",
   "AUTHOR" => "Alessandro Ghedini <alexbio\@cpan.org>",
   "BUILD_REQUIRES" => {
     "File::Find" => 0,
@@ -29,7 +29,7 @@ my %WriteMakefileArgs = (
     "strict" => 0,
     "warnings" => 0
   },
-  "VERSION" => "0.05",
+  "VERSION" => "0.06",
   "test" => {
     "TESTS" => "t/*.t"
   }

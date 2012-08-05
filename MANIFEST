@@ -8,7 +8,6 @@ README
 dist.ini
 lib/WWW/Google/Auth/ClientLogin.pm
 t/00-compile.t
-t/00-load.t
 t/boilerplate.t
 t/manifest.t
 t/pod-coverage.t

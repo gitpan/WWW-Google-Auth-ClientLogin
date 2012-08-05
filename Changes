@@ -1,9 +1,25 @@
 ==================================================
-Changes from 2011-07-08 00:00:00 +0000 to present.
+Changes from 2011-08-06 00:00:00 +0000 to present.
 ==================================================
 
 -----------------------------------------
-version 0.05 at 2012-07-07 13:02:25 +0000
+version 0.06 at 2012-08-05 16:59:38 +0000
+-----------------------------------------
+
+  Change: c9a00ea8405a9bd3d948049693890245a9b86a35
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date : 2012-08-05 18:24:18 +0000
+
+    ClientLogin.pm: client login API is deprecated 
+
+  Change: 1f5a93841cb915610a895b9ee4c236f789f1db54
+  Author: Alessandro Ghedini <al3xbio@gmail.com>
+  Date : 2012-07-07 15:03:15 +0000
+
+    t: remove duplicate 00-load.t 
+
+-----------------------------------------
+version 0.05 at 2012-07-07 13:01:49 +0000
 -----------------------------------------
 
   Change: 62b7743d79e89c095f0a17874de3ed0e6e53d4d0
@@ -25,5 +41,5 @@ version 0.05 at 2012-07-07 13:02:25 +0000
     fix double declaration in SYNOPSIS 
 
 ================================================
-Plus 4 releases after 2011-07-08 00:00:00 +0000.
+Plus 4 releases after 2011-08-06 00:00:00 +0000.
 ================================================

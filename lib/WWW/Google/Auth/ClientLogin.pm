@@ -1,6 +1,6 @@
 package WWW::Google::Auth::ClientLogin;
 {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.05';
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.06';
 }
 
 use Carp;
@@ -11,11 +11,11 @@ use strict;
 
 =head1 NAME
 
-WWW::Google::Auth::ClientLogin - Perl module to interact with Google's ClientLogin protocol
+WWW::Google::Auth::ClientLogin - (DEPRECATED) Perl module to interact with Google's ClientLogin protocol
 
 =head1 VERSION
 
-version 0.05
+version 0.06
 
 =head1 SYNOPSIS
 
@@ -43,6 +43,9 @@ WWW::Google::Auth::ClientLogin implements the support to such method
 providing an easy-to-use object oriented interface.
 
 For additional information see L<http://code.google.com/intl/it-IT/apis/accounts/docs/AuthForInstalledApps.html>
+
+B<Important>: ClientLogin has been officially deprecated and will be
+discontinued in the future.
 
 =head1 METHODS
 
