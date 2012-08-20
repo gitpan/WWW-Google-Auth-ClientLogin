@@ -1,13 +1,13 @@
 package WWW::Google::Auth::ClientLogin;
 {
-  $WWW::Google::Auth::ClientLogin::VERSION = '0.06';
+  $WWW::Google::Auth::ClientLogin::VERSION = '0.07';
 }
 
 use Carp;
 use HTTP::Tiny;
 
-use warnings;
 use strict;
+use warnings;
 
 =head1 NAME
 
@@ -15,7 +15,7 @@ WWW::Google::Auth::ClientLogin - (DEPRECATED) Perl module to interact with Googl
 
 =head1 VERSION
 
-version 0.06
+version 0.07
 
 =head1 SYNOPSIS
 
